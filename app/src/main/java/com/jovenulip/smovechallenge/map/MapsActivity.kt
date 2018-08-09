@@ -34,14 +34,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapsContract.View 
         setContentView(R.layout.activity_maps)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        title = if (intent.action == Constants.ACTION_AVAILABLE_CARS) "Drop Off Locations" else "Car Locations"
+        title = if (intent.action == Constants.ACTION_AVAILABLE_CARS)
+            getString(R.string.drop_off_locations) else getString(R.string.car_location)
 
         presenter = MapsPresenter(this)
 
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -102,11 +102,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapsContract.View 
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(bookingLocation, 14F))
 
         } else {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(1.3521, 103.8198), 12F))
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(Constants.SINGAPORE_LAT, Constants.SINGAPORE_LON), 12F))
             presenter.getCarLocations()
         }
     }
-
 
     class CarClusterRenderer(context: Context, map: GoogleMap, clusterManager: ClusterManager<MapsClusterItem>)
         : DefaultClusterRenderer<MapsClusterItem>(context, map, clusterManager) {

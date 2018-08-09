@@ -2,7 +2,7 @@
     <string name="app_name">sMoveChallenge</string>
     <string name="title_activity_maps">Map</string>
 
-    <string name="reset_search">Reset Search</string>
+    <string name="reset_booking">Reset Booking</string>
     <string name="check_availability">Check Availability</string>
     <string name="check_cars_availability">Check cars availability</string>
     <string name="no_internet">Please check your internet connection</string>
@@ -13,4 +13,6 @@
     <string name="drop_off_id">Drop off Id:</string>
     <string name="start">Start</string>
     <string name="end">End</string>
+    <string name="drop_off_locations">Drop Off Locations</string>
+    <string name="car_location">Car Locations</string>
 </resources>

@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 val startDate = getUnixTimeFromDate("${txtStartDate.text} ${txtStartTime.text}")
                 val endDate = getUnixTimeFromDate("${txtEndDate.text} ${txtEndTime.text}")
 
+                progress.visibility = View.VISIBLE
                 presenter.getBookings(startDate, endDate)
             } else {
                 isListShown = false
@@ -77,6 +78,7 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     override fun showBookings(mList: List<BookingModel.DataItems>) {
         isListShown = true
         updateUI(isListShown)
+        progress.visibility = View.GONE
 
         rvBookingList.layoutManager = LinearLayoutManager(this)
         rvBookingList.adapter = BookingAdapter(this, mList) {
@@ -92,15 +94,8 @@ class MainActivity : AppCompatActivity(), MainContract.View {
     }
 
     override fun showError(er : Int) {
+        progress.visibility = View.GONE
         Snackbar.make(vwMain, getString(er), Snackbar.LENGTH_SHORT).show()
-    }
-
-    private fun updateUI(listShown: Boolean) {
-        txtTitle.visibility = if (listShown) View.GONE else View.VISIBLE
-        cardStart.visibility = if (listShown) View.GONE else View.VISIBLE
-        cardEnd.visibility = if (listShown) View.GONE else View.VISIBLE
-        rvBookingList.visibility = if (listShown) View.VISIBLE else View.GONE
-        btnShowAvailableCars.text = if (listShown) getString(R.string.reset_search) else getString(R.string.check_availability)
     }
 
     private fun showDate(isNextDay: Boolean) {
@@ -148,6 +143,14 @@ class MainActivity : AppCompatActivity(), MainContract.View {
 
         }, hr, min, false)
         dpd.show()
+    }
+
+    private fun updateUI(listShown: Boolean) {
+        txtTitle.visibility = if (listShown) View.GONE else View.VISIBLE
+        cardStart.visibility = if (listShown) View.GONE else View.VISIBLE
+        cardEnd.visibility = if (listShown) View.GONE else View.VISIBLE
+        rvBookingList.visibility = if (listShown) View.VISIBLE else View.GONE
+        btnShowAvailableCars.text = if (listShown) getString(R.string.reset_booking) else getString(R.string.check_availability)
     }
 }
 

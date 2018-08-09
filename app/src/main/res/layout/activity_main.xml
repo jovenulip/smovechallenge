@@ -107,6 +107,16 @@
 
     </android.support.v7.widget.CardView>
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardEnd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <Button
         android:id="@+id/btnShowAvailableCars"
         android:layout_width="match_parent"
