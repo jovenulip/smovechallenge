@@ -1,13 +1,14 @@
 package com.jovenulip.smovechallenge.main
 
-import android.util.Log
+import com.jovenulip.smovechallenge.R
 import com.jovenulip.smovechallenge.data.api.ServiceApi
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.net.UnknownHostException
 
 class MainPresenter(private val mView: MainContract.View) : MainContract.Presenter {
 
-    val serviceApi by lazy {
+    private val serviceApi by lazy {
         ServiceApi.create()
     }
 
@@ -15,7 +16,7 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
         mView.presenter = this
     }
 
-    override fun getBookings(startTime : String, endTime : String) {
+    override fun getBookings(startTime: String, endTime: String) {
         serviceApi.availability(startTime, endTime)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -25,7 +26,12 @@ class MainPresenter(private val mView: MainContract.View) : MainContract.Present
                         },
 
                         { error ->
-                            Log.v("MainPresenter", error.message)
+
+                            if (error is UnknownHostException) {
+                                mView.showError(R.string.no_internet)
+                            } else {
+                                mView.showError(R.string.error_request)
+                            }
                         }
                 )
     }

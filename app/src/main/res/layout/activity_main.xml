@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vwMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
@@ -11,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="Check cars availability"
+        android:text="@string/check_cars_availability"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -31,7 +32,7 @@
                 android:id="@+id/txtStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Start"
+                android:text="@string/start"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -76,7 +77,7 @@
                 android:id="@+id/txtEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="End"
+                android:text="@string/end"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -115,7 +116,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="Check Availability"
+        android:text="@string/check_availability"
         android:textColor="@android:color/white"
         android:textStyle="bold" />
 

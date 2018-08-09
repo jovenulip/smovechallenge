@@ -47,5 +47,15 @@ class AppHelper {
             val unix = date.time / 1000
             return unix.toString()
         }
+
+        fun getBitmapFromDrawable(drawable: Drawable): Bitmap {
+            val canvas = Canvas()
+            val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+            canvas.setBitmap(bitmap)
+            drawable.setBounds(0, 0, drawable.intrinsicWidth, drawable.intrinsicHeight)
+            drawable.draw(canvas)
+
+            return bitmap
+        }
     }
 }

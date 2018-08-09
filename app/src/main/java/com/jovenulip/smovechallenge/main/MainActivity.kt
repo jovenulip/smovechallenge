@@ -2,20 +2,24 @@ package com.jovenulip.smovechallenge.main
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import com.jovenulip.smovechallenge.AppHelper.Helper.getCurrentDateToString
 import com.jovenulip.smovechallenge.AppHelper.Helper.getCurrentTimeToString
 import com.jovenulip.smovechallenge.AppHelper.Helper.getNextDayToString
 import com.jovenulip.smovechallenge.AppHelper.Helper.getStringToDate
 import com.jovenulip.smovechallenge.AppHelper.Helper.getStringToTime
 import com.jovenulip.smovechallenge.AppHelper.Helper.getUnixTimeFromDate
+import com.jovenulip.smovechallenge.Constants
 import com.jovenulip.smovechallenge.R
 import com.jovenulip.smovechallenge.data.model.BookingModel
+import com.jovenulip.smovechallenge.map.MapsActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -41,24 +45,33 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         txtEndTime.setOnClickListener { showTime(true) }
 
         btnShowAvailableCars.setOnClickListener {
-            if(!isListShown){
+            if (!isListShown) {
                 val startDate = getUnixTimeFromDate("${txtStartDate.text} ${txtStartTime.text}")
                 val endDate = getUnixTimeFromDate("${txtEndDate.text} ${txtEndTime.text}")
 
                 presenter.getBookings(startDate, endDate)
-            }else{
+            } else {
                 isListShown = false
                 updateUI(isListShown)
             }
-
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.menu_car, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_car -> {
+                startActivity(Intent(this, MapsActivity::class.java))
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun showBookings(mList: List<BookingModel.DataItems>) {
@@ -68,20 +81,26 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         rvBookingList.layoutManager = LinearLayoutManager(this)
         rvBookingList.adapter = BookingAdapter(this, mList) {
             val data = mList[it]
-            Toast.makeText(this, "${data.id}", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, MapsActivity::class.java)
+            intent.action = Constants.ACTION_AVAILABLE_CARS
+            intent.putExtra(Constants.AVAILABLE_CAR, data)
+
+            startActivity(intent)
+            overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
         }
     }
 
-    override fun showError() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun showError(er : Int) {
+        Snackbar.make(vwMain, getString(er), Snackbar.LENGTH_SHORT).show()
     }
 
-    private fun updateUI(listShown : Boolean){
-        txtTitle.visibility = if(listShown) View.GONE else View.VISIBLE
-        cardStart.visibility = if(listShown) View.GONE else View.VISIBLE
-        cardEnd.visibility = if(listShown) View.GONE else View.VISIBLE
-        rvBookingList.visibility = if(listShown) View.VISIBLE else View.GONE
-        btnShowAvailableCars.text = if(listShown) "Reset Search" else "Check Availability"
+    private fun updateUI(listShown: Boolean) {
+        txtTitle.visibility = if (listShown) View.GONE else View.VISIBLE
+        cardStart.visibility = if (listShown) View.GONE else View.VISIBLE
+        cardEnd.visibility = if (listShown) View.GONE else View.VISIBLE
+        rvBookingList.visibility = if (listShown) View.VISIBLE else View.GONE
+        btnShowAvailableCars.text = if (listShown) getString(R.string.reset_search) else getString(R.string.check_availability)
     }
 
     private fun showDate(isNextDay: Boolean) {
