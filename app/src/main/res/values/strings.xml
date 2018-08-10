@@ -4,9 +4,7 @@
 
     <string name="reset_booking">Reset Booking</string>
     <string name="check_availability">Check Availability</string>
-    <string name="check_cars_availability">Check cars availability</string>
-    <string name="no_internet">Please check your internet connection</string>
-    <string name="error_request">Error processing your request</string>
+    <string name="check_cars_availability">Check Cars Availability</string>
     <string name="available">Available</string>
     <string name="not_available">Not Available</string>
     <string name="car_id">Car Id:</string>
@@ -15,4 +13,11 @@
     <string name="end">End</string>
     <string name="drop_off_locations">Drop Off Locations</string>
     <string name="car_location">Car Locations</string>
+    <string name="drop_off_points">Drop off points</string>
+    <string name="available_cars">Available Cars</string>
+
+    <string name="error_date">Start date should not be higher than end date</string>
+    <string name="error_request">Error processing your request</string>
+    <string name="no_internet">Please check your internet connection</string>
+
 </resources>

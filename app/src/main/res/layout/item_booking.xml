@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:clickable="true"
     android:focusable="true"
@@ -10,35 +10,66 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:paddingBottom="24dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="24dp">
 
-        <TextView
-            android:id="@+id/txtCarId"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtAvailableCars"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/available_cars"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtAvailableCars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_car_blue"
+                android:gravity="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:drawableStart="@drawable/ic_car_blue"
-            android:drawablePadding="5dp"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txtDropOff"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:text="@string/drop_off_points"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtDropOff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableStart="@drawable/ic_place_red"
+                android:gravity="center"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:drawableStart="@drawable/ic_place_red"
-            android:drawablePadding="5dp"
-            android:textSize="18sp" />
+            android:contentDescription="@null"
+            android:src="@drawable/ic_chevron_right" />
 
     </LinearLayout>
 

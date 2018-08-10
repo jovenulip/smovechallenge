@@ -49,8 +49,13 @@ class MainActivity : AppCompatActivity(), MainContract.View {
                 val startDate = getUnixTimeFromDate("${txtStartDate.text} ${txtStartTime.text}")
                 val endDate = getUnixTimeFromDate("${txtEndDate.text} ${txtEndTime.text}")
 
-                progress.visibility = View.VISIBLE
-                presenter.getBookings(startDate, endDate)
+                if(startDate > endDate){
+                    Snackbar.make(vwMain, getString(R.string.error_date), Snackbar.LENGTH_SHORT).show()
+                }else{
+                    progress.visibility = View.VISIBLE
+                    presenter.getBookings(startDate.toString(), endDate.toString())
+                }
+
             } else {
                 isListShown = false
                 updateUI(isListShown)

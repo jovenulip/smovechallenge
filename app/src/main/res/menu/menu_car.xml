@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_car"
         android:icon="@drawable/ic_car_white"
-        android:title="Car Locations"
+        android:title="@string/car_location"
         app:showAsAction="always" />
 </menu>

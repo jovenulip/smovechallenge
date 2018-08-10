@@ -82,8 +82,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, MapsContract.View 
         mClusterManager.renderer = CarClusterRenderer(this, mMap, mClusterManager)
 
         mMap.isIndoorEnabled = false
-        mMap.setOnCameraIdleListener(mClusterManager);
-        mMap.setOnMarkerClickListener(mClusterManager)
+        mMap.setOnCameraIdleListener(mClusterManager)
 
         if (intent.action == Constants.ACTION_AVAILABLE_CARS) {
             val mData: BookingModel.DataItems = intent.getParcelableExtra(Constants.AVAILABLE_CAR)

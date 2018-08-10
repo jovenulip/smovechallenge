@@ -41,11 +41,10 @@ class AppHelper {
             return getCurrentTimeToString(sdf.parse(s))
         }
 
-        fun getUnixTimeFromDate(s: String): String {
+        fun getUnixTimeFromDate(s: String): Long {
             val sdf = SimpleDateFormat("MMM dd yyyy hh:mm aa", Locale.ENGLISH)
             val date = sdf.parse(s)
-            val unix = date.time / 1000
-            return unix.toString()
+            return date.time / 1000
         }
 
         fun getBitmapFromDrawable(drawable: Drawable): Bitmap {

@@ -32,7 +32,7 @@ interface ServiceApi {
                     .readTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(60, TimeUnit.SECONDS)
                     .addInterceptor(interceptor)
-                    .build();
+                    .build()
 
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
